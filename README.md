@@ -2,7 +2,7 @@
 
 Automatically scrobbles tracks from Yandex Music every 24 hours using GitHub Actions.
 
-> [!IMPORTANT] Important Note on Tokens:
+> [!IMPORTANT]
 > `LASTFM_SESSION` and `YM_TOKEN` are valid for 1 year. After expiration, the workflow will fail.
 
 **Setup Instructions:**
