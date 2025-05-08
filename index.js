@@ -52,6 +52,7 @@ const HistoryReponseSchema = z.object({
 })
 
 const getDateInfo = ({ daysShift }) => {
+    // TODO: UTC
     const today = new Date()
     const targetDate = new Date(today)
     targetDate.setDate(today.getDate() + daysShift)
