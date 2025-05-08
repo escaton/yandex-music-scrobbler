@@ -5,7 +5,6 @@ import { LastFMTrack } from 'lastfm-ts-api'
 
 const envSchema = z.object({
     YM_TOKEN: z.string(),
-    YM_UID: z.string().transform((val) => parseInt(val, 10)),
     LASTFM_API_KEY: z.string(),
     LASTFM_API_SECRET: z.string(),
     LASTFM_SESSION: z.string(),
@@ -75,7 +74,7 @@ const getDateInfo = ({ daysShift }) => {
 }
 
 const run = async () => {
-    await ymApi.init({ access_token: env.YM_TOKEN, uid: env.YM_UID })
+    await ymApi.init({ access_token: env.YM_TOKEN })
     // @ts-ignore
     const history = HistoryReponseSchema.parse(await ymApi.getHistory())
 
@@ -142,9 +141,9 @@ const run = async () => {
     // Scrobble tracks in batches of 50
     for (let i = 0; i < tracksToScrobble.length; i += 50) {
         const batch = tracksToScrobble.slice(i, i + 50)
-        const result = await lastFMtrack.scrobbleMany(batch)
-        console.log('Successfully scrobbled tracks:')
-        console.dir(result, { depth: null })
+        // const result = await lastFMtrack.scrobbleMany(batch)
+        // console.log('Successfully scrobbled tracks:')
+        // console.dir(result, { depth: null })
     }
 }
 

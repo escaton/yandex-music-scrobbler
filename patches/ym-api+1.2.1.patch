@@ -1,12 +1,30 @@
 diff --git a/node_modules/ym-api/dist/YMApi.js b/node_modules/ym-api/dist/YMApi.js
-index 5f404c5..42b927d 100644
+index 5f404c5..b130fda 100644
 --- a/node_modules/ym-api/dist/YMApi.js
 +++ b/node_modules/ym-api/dist/YMApi.js
-@@ -379,5 +379,11 @@ class YMApi {
+@@ -29,12 +29,13 @@ class YMApi {
+      */
+     async init(config) {
+         // Skip auth if access_token and uid are present
+-        if (config.access_token && config.uid) {
++        if (config.access_token) {
+             this.user.token = config.access_token;
+-            this.user.uid = config.uid;
++            const accountStatus = await this.getAccountStatus();
++            this.user.uid = accountStatus.account.uid;
+             return {
+-                access_token: config.access_token,
+-                uid: config.uid,
++                access_token: this.user.token,
++                uid: this.user.uid,
+             };
+         }
+         if (!config.username || !config.password) {
+@@ -379,5 +380,11 @@ class YMApi {
              .addHeaders(this.getAuthHeader());
          return this.httpClient.get(request);
      }
-+    getHistory(user = null) {
++    getHistory() {
 +        const request = PreparedRequest_1.apiRequest()
 +            .setPath(`/music-history?fullModelsCount=9999`)
 +            .addHeaders(this.getAuthHeader());
