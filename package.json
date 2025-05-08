@@ -1,0 +1,27 @@
+{
+  "name": "yandex-music-scrobbler",
+  "version": "1.0.0",
+  "description": "Scrobbles tracks from Yandex Music every 24 hours",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --env-file .env index.js",
+    "session": "node --env-file .env session.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "patch-package"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lastfm-ts-api": "^2.1.0",
+    "patch-package": "^8.0.0",
+    "ym-api": "^1.2.1",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "prettier": "^3.5.3"
+  }
+}

@@ -1,0 +1,31 @@
+name: Daily Yandex Music Scrobble
+
+on:
+  schedule:
+    - cron: '17 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  scrobble:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run scrobbler
+        run: npm run start
+        env:
+          YM_TOKEN: ${{ secrets.YM_TOKEN }}
+          YM_UID: ${{ secrets.YM_UID }}
+          LASTFM_API_KEY: ${{ secrets.LASTFM_API_KEY }}
+          LASTFM_SESSION: ${{ secrets.LASTFM_SESSION }}
+          LASTFM_API_SECRET: ${{ secrets.LASTFM_API_SECRET }}

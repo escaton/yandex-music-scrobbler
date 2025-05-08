@@ -1,0 +1,16 @@
+diff --git a/node_modules/ym-api/dist/YMApi.js b/node_modules/ym-api/dist/YMApi.js
+index 5f404c5..42b927d 100644
+--- a/node_modules/ym-api/dist/YMApi.js
++++ b/node_modules/ym-api/dist/YMApi.js
+@@ -379,5 +379,11 @@ class YMApi {
+             .addHeaders(this.getAuthHeader());
+         return this.httpClient.get(request);
+     }
++    getHistory(user = null) {
++        const request = PreparedRequest_1.apiRequest()
++            .setPath(`/music-history?fullModelsCount=9999`)
++            .addHeaders(this.getAuthHeader());
++        return this.httpClient.get(request);
++    }
+ }
+ exports.default = YMApi;
