@@ -141,9 +141,9 @@ const run = async () => {
     // Scrobble tracks in batches of 50
     for (let i = 0; i < tracksToScrobble.length; i += 50) {
         const batch = tracksToScrobble.slice(i, i + 50)
-        // const result = await lastFMtrack.scrobbleMany(batch)
-        // console.log('Successfully scrobbled tracks:')
-        // console.dir(result, { depth: null })
+        const result = await lastFMtrack.scrobbleMany(batch)
+        console.log('Successfully scrobbled tracks:')
+        console.dir(result, { depth: null })
     }
 }
 
