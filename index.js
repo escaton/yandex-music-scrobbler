@@ -36,7 +36,7 @@ const HistoryReponseSchema = z.object({
                                     artists: z.array(
                                         z.object({ name: z.string() })
                                     ),
-                                    durationMs: z.number(),
+                                    durationMs: z.number().optional(),
                                     albums: z.array(
                                         z.object({ title: z.string() })
                                     ),
@@ -76,7 +76,8 @@ const getDateInfo = ({ daysShift }) => {
 const run = async () => {
     await ymApi.init({ access_token: env.YM_TOKEN })
     // @ts-ignore
-    const history = HistoryReponseSchema.parse(await ymApi.getHistory())
+    const historyRawData = await ymApi.getHistory()
+    const history = HistoryReponseSchema.parse(historyRawData)
 
     let {
         dateString: yesterdayDateString,
@@ -110,6 +111,9 @@ const run = async () => {
 
         for (const track of item.tracks) {
             const fullModel = track.data.fullModel
+            if (!fullModel.durationMs) {
+                return
+            }
             const artist = fullModel.artists[0].name
             const title = fullModel.title
             const durationSec = fullModel.durationMs / 1000
